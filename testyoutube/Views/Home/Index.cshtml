@@ -1,8 +1,49 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿
+@using Microsoft.AspNetCore.Identity
+@using testyoutube.Areas.Identity.Data
+
+
+@inject SignInManager<testyoutubeUser> SignInManager
+@inject UserManager<testyoutubeUser> UserManager
+
+@{
+    ViewData["Title"] = "Accueil";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@if (SignInManager.IsSignedIn(User))
+{
+    <h1 class="text-white text-center">Vous êtes connectés</h1>
+
+    <table>
+        <tr>
+            <th>ID_ticket</th>
+            <th>ID_utilisateur</th>
+            <th>Titre</th>
+            <th>Description</th>
+            <th>ID_Statut</th>
+            <th>Date_creation</th>
+            <th>Date_modif_statut</th>
+        </tr>
+        @foreach (var ticket in Context.Tickets)
+        {
+            <!-- Afficher les informations récupérées dans le balisage HTML -->
+            <tr>
+                <td>@ticket.ID_ticket</td>
+                <td>@ticket.ID_utilisateur</td>
+                <td>@ticket.Titre</td>
+                <td>@ticket.Description</td>
+                <td>@ticket.ID_Statut</td>
+                <td>@ticket.Date_creation</td>
+                <td>@ticket.Date_modif_statut</td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <div class="text-center text-white">
+        <h1 class="display-4">Support Ticket</h1>
+        <p>Connectez-vous ou inscrivez-vous en haut de la page</p>
+    </div>
+
+}
