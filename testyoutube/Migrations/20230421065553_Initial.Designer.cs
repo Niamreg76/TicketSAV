@@ -173,7 +173,7 @@ namespace testyoutube.Migrations
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<DateTimeOffset?>("LockoutEnd")
+                    b.Property<DateTime>("LockoutEnd")
                         .HasColumnType("timestamp");
 
                     b.Property<string>("NormalizedEmail")

@@ -13,31 +13,6 @@
 @if (SignInManager.IsSignedIn(User))
 {
     <h1 class="text-white text-center">Vous êtes connectés</h1>
-
-    <table>
-        <tr>
-            <th>ID_ticket</th>
-            <th>ID_utilisateur</th>
-            <th>Titre</th>
-            <th>Description</th>
-            <th>ID_Statut</th>
-            <th>Date_creation</th>
-            <th>Date_modif_statut</th>
-        </tr>
-        @foreach (var ticket in Context.Tickets)
-        {
-            <!-- Afficher les informations récupérées dans le balisage HTML -->
-            <tr>
-                <td>@ticket.ID_ticket</td>
-                <td>@ticket.ID_utilisateur</td>
-                <td>@ticket.Titre</td>
-                <td>@ticket.Description</td>
-                <td>@ticket.ID_Statut</td>
-                <td>@ticket.Date_creation</td>
-                <td>@ticket.Date_modif_statut</td>
-            </tr>
-        }
-    </table>
 }
 else
 {
