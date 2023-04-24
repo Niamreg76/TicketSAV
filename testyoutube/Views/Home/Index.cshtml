@@ -2,17 +2,51 @@
 @using Microsoft.AspNetCore.Identity
 @using testyoutube.Areas.Identity.Data
 
-
+@model List<testyoutube.Data.Tickets>
 @inject SignInManager<testyoutubeUser> SignInManager
 @inject UserManager<testyoutubeUser> UserManager
 
 @{
     ViewData["Title"] = "Accueil";
+
 }
 
 @if (SignInManager.IsSignedIn(User))
 {
     <h1 class="text-white text-center">Vous êtes connectés</h1>
+
+
+    <h3 class="text-white">Liste des tickets</h3>
+    <div class="neumorphism">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Titre</th>
+                    <th>Description</th>
+                    <th>Statut</th>
+                    <th>Date de création</th>
+                    <th>Date de modification</th>
+                    <th>Utilisateur</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ticket in Model)
+                {
+                    <tr>
+                        <td>@ticket.ID_ticket</td>
+                        <td>@ticket.Titre</td>
+                        <td>@ticket.Description</td>
+                        <td>@ticket.ID_Statut</td>
+                        <td>@ticket.Date_creation</td>
+                        <td>@ticket.Date_modif</td>
+                        <td>@ticket.ID_utilisateur</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
 }
 else
 {

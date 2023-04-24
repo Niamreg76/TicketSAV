@@ -21,6 +21,7 @@ namespace testyoutube
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<PersonDataContext>(options => options.UseMySQL(Configuration.GetConnectionString("Default")));
+            services.AddDbContext<TicketDataContext>(options => options.UseMySQL(Configuration.GetConnectionString("TicketContext")));
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
