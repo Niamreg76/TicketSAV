@@ -17,7 +17,7 @@
 
 
     <h3 class="text-white">Liste des tickets</h3>
-    <div class="neumorphism">
+    <div class="neumorphism" style="margin-right: -45px;">
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -28,20 +28,22 @@
                     <th>Date de création</th>
                     <th>Date de modification</th>
                     <th>Utilisateur</th>
+                    <th>Panne</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var ticket in Model)
                 {
-                    <tr>
-                        <td>@ticket.ID_ticket</td>
-                        <td>@ticket.Titre</td>
-                        <td>@ticket.Description</td>
-                        <td>@ticket.ID_Statut</td>
-                        <td>@ticket.Date_creation</td>
-                        <td>@ticket.Date_modif</td>
-                        <td>@ticket.ID_utilisateur</td>
-                    </tr>
+                <tr>
+                    <td>@ticket.ID_ticket</td>
+                    <td>@ticket.Titre</td>
+                    <td>@ticket.Description</td>
+                    <td>@ticket.Statut.Nom</td>
+                    <td>@ticket.Date_creation</td>
+                    <td>@ticket.Date_modif</td>
+                    <td>@UserManager.FindByIdAsync(ticket.ID_utilisateur).Result.UserName</td>
+                    <td>@ticket.panne.Description</td>
+                </tr>
                 }
             </tbody>
         </table>

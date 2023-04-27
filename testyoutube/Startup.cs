@@ -20,7 +20,6 @@ namespace testyoutube
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<PersonDataContext>(options => options.UseMySQL(Configuration.GetConnectionString("Default")));
             services.AddDbContext<TicketDataContext>(options => options.UseMySQL(Configuration.GetConnectionString("TicketContext")));
             services.AddControllersWithViews();
             services.AddRazorPages();

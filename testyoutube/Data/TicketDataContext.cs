@@ -15,13 +15,23 @@ namespace testyoutube.Data
         }
 
         public DbSet<Tickets> Tickets { get; set; }
-        //erreur ici lors de la génération d'un controlleur pour le ticket' regarder la vidéo 
+        public DbSet<Panne> panne { get; set;}
+        public DbSet<Statut> statut { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            //modelBuilder.Entity<Tickets>().OwnsOne(x => x.ID_ticket);
+            modelBuilder.Entity<Tickets>()
+                .HasOne(t => t.panne)
+                .WithMany()
+                .HasForeignKey(t => t.ID_panne);
+
+            modelBuilder.Entity<Tickets>()
+                .HasOne(t => t.Statut)
+                .WithMany()
+                .HasForeignKey(t => t.ID_statut);
         }
     }
 }
