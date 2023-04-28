@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using testyoutube.Areas.Identity.Data;
+using testyoutube.Services;
+using IEmailSender = testyoutube.Services.IEmailSender;
 
 namespace testyoutube.Areas.Identity.Pages.Account
 {
@@ -19,6 +21,7 @@ namespace testyoutube.Areas.Identity.Pages.Account
     {
         private readonly UserManager<testyoutubeUser> _userManager;
         private readonly IEmailSender _emailSender;
+
 
         public ForgotPasswordModel(UserManager<testyoutubeUser> userManager, IEmailSender emailSender)
         {
@@ -46,7 +49,7 @@ namespace testyoutube.Areas.Identity.Pages.Account
                     // Don't reveal that the user does not exist or is not confirmed
                     return RedirectToPage("./ForgotPasswordConfirmation");
                 }
-
+                var email = Input.Email;
                 // For more information on how to enable account confirmation and password reset please 
                 // visit https://go.microsoft.com/fwlink/?LinkID=532713
                 var code = await _userManager.GeneratePasswordResetTokenAsync(user);
@@ -57,10 +60,14 @@ namespace testyoutube.Areas.Identity.Pages.Account
                     values: new { area = "Identity", code },
                     protocol: Request.Scheme);
 
-                await _emailSender.SendEmailAsync(
+/*                await _emailSender.SendEmailAsync(
                     Input.Email,
                     "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");*/
+
+                var message = "Bonjour, \n\n Cliquez sur le lien suivant pour modifier le mot de passe : \n\n " + callbackUrl + " \n\n Ce message est généré automatiquement.";
+
+                await _emailSender.SendMailAsync(email, "Modifier le mot de passe", message);
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }
