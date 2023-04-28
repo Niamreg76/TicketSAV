@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
 	  <NoWarn>NU1605</NoWarn>
+    <UserSecretsId>1af519a4-4b75-458d-b8ac-be3a879840ad</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,6 +17,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
     <PackageReference Include="MySql.EntityFrameworkCore" Version="5.0.17.2" />
+    <PackageReference Include="SendGrid" Version="9.28.1" />
   </ItemGroup>
 
   <ItemGroup>

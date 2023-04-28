@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using testyoutube.Areas.Identity.Data;
+using testyoutube.Services;
+using IEmailSender = testyoutube.Services.IEmailSender;
 
 namespace testyoutube.Areas.Identity.Pages.Account
 {
@@ -15,11 +17,13 @@ namespace testyoutube.Areas.Identity.Pages.Account
     {
         private readonly UserManager<testyoutubeUser> _userManager;
         private readonly IEmailSender _sender;
+        private readonly IEmailSender _emailSender;
 
-        public RegisterConfirmationModel(UserManager<testyoutubeUser> userManager, IEmailSender sender)
+        public RegisterConfirmationModel(UserManager<testyoutubeUser> userManager, IEmailSender sender, IEmailSender emailSender)
         {
             _userManager = userManager;
             _sender = sender;
+            this._emailSender = emailSender;
         }
 
         public string Email { get; set; }
@@ -42,7 +46,7 @@ namespace testyoutube.Areas.Identity.Pages.Account
             }
 
             Email = email;
-            // Once you add a real email sender, you should remove this code that lets you confirm the account
+
             DisplayConfirmAccountLink = true;
             if (DisplayConfirmAccountLink)
             {
@@ -54,6 +58,10 @@ namespace testyoutube.Areas.Identity.Pages.Account
                     pageHandler: null,
                     values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                     protocol: Request.Scheme);
+
+                var message = "Bonjour, \n\n Cliquez sur le lien suivant pour confirmer l'adresse mail : \n\n " + EmailConfirmationUrl + " \n\n Ce message est généré automatiquement.";
+
+                await _emailSender.SendMailAsync(email, "Confirmation de mail", message);
             }
 
             return Page();

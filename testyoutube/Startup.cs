@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using testyoutube.Data;
+using testyoutube.Services;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace testyoutube
 {
@@ -23,6 +25,9 @@ namespace testyoutube
             services.AddDbContext<TicketDataContext>(options => options.UseMySQL(Configuration.GetConnectionString("TicketContext")));
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddTransient<Services.IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

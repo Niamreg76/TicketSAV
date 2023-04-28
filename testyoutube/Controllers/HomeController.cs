@@ -10,6 +10,7 @@ using testyoutube.Models;
 using Microsoft.AspNetCore.Identity;
 using testyoutube.Areas.Identity.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using testyoutube.Services;
 
 namespace testyoutube.Controllers
 {
@@ -18,12 +19,14 @@ namespace testyoutube.Controllers
         private readonly UserManager<testyoutubeUser> _userManager;
         private readonly ILogger<HomeController> _logger;
         private readonly TicketDataContext _context;
+        private readonly IEmailSender _emailSender;
 
-        public HomeController(ILogger<HomeController> logger, TicketDataContext context, UserManager<testyoutubeUser> userManager)
+        public HomeController(ILogger<HomeController> logger, TicketDataContext context, UserManager<testyoutubeUser> userManager, IEmailSender emailSender)
         {
             _logger = logger;
             _context = context;
             _userManager = userManager;
+            this._emailSender = emailSender;
         }
 
         public IActionResult Index()
@@ -33,6 +36,14 @@ namespace testyoutube.Controllers
             var listTicket2 = _context.Tickets.Include(t => t.panne).ToList();
             //ViewBag.ID_panne = new SelectList(_context.panne, "ID_panne", "Description");
             // ViewBag.ID_panne = new SelectList(_context.Statut, "ID_panne", "Description");
+
+            //var email = "romangermain1@gmail.com";
+            //var subject = "Test";
+            //var message = "Hello World";
+
+            //await _emailSender.SendMailAsync(email, subject, message);
+
+
             return View(listTicket);
         }
 
