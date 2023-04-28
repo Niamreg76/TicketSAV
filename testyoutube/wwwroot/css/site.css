@@ -1,6 +1,9 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:400,900');
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
 a.navbar-brand {
     white-space: normal;
     text-align: center;
@@ -67,6 +70,7 @@ body {
     margin-bottom: 60px;
     background: rgb(35,33,51);
     background: linear-gradient(90deg, rgba(35,33,51,1) 0%, rgba(17,111,144,1) 33%, rgba(90,195,223,1) 98%);
+    /* font-family: 'Nunito Sans', sans-serif; */
 }
 
 .footer {
@@ -93,4 +97,108 @@ body {
     background-color: rgba(255, 255, 255, 0.67);
     border-radius: 12px;
     border: 1px solid rgba(209, 213, 219, 0.3);
+}
+
+.clignotement {
+    animation: clignoter 1s step-start infinite;
+}
+
+@keyframes clignoter {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* vagues */
+.vague {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    min-height: 100vh;
+    background: white;
+    position: relative;
+    width: 100%;
+    background: #3586ff;
+    min-height: 100px;
+    padding: 20px 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+    .vague .wave {
+        position: absolute;
+        top: -100px;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        background: url(../images/wave.png);
+        background-size: 1000px 100px;
+    }
+
+        .vague .wave#wave1 {
+            z-index: 1000;
+            opacity: 1;
+            bottom: 0;
+            animation: animateWave 4s linear infinite;
+        }
+
+        .vague .wave#wave2 {
+            z-index: 999;
+            opacity: 0.5;
+            bottom: 10px;
+            animation: animateWave2 4s linear infinite;
+        }
+
+        .vague .wave#wave3 {
+            z-index: 1000;
+            opacity: 0.2;
+            bottom: 15px;
+            animation: animateWave 3s linear infinite;
+        }
+
+        .vague .wave#wave4 {
+            z-index: 999;
+            opacity: 0.7;
+            bottom: 20px;
+            animation: animateWave2 3s linear infinite;
+        }
+
+@keyframes animateWave {
+    0% {
+        background-position-x: 1000px;
+    }
+
+    100% {
+        background-position-x: 0px;
+    }
+}
+
+@keyframes animateWave2 {
+    0% {
+        background-position-x: 0px;
+    }
+
+    100% {
+        background-position-x: 1000px;
+    }
+}
+
+.effet{
+
+}
+
+.effet:hover {
+    margin: 0;
+    padding-bottom: 0.5rem;
+    color: #03dac6;
+    transition: all 0.3s ease;
+    z-index: 3;
+    transform: translate3d(0, -5px, 11px);
+    color: #ff0266;
 }

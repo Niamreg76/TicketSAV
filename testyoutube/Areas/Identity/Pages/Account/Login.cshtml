@@ -2,10 +2,14 @@
 @model LoginModel
 
 @{
-    ViewData["Title"] = "Log in";
+    ViewData["Title"] = "Se connecter";
 }
 
-<h1 class="text-white">@ViewData["Title"]</h1>
+<div class="d-flex">
+    <h1 class="text-white" id="ecriture">@ViewData["Title"]</h1>
+    <h1 class="text-white clignotement">_</h1>
+</div>
+
 <div class="row">
     <div class="col-md-4 neumorphism">
         <section>
