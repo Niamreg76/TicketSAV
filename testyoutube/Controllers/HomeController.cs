@@ -44,6 +44,8 @@ namespace testyoutube.Controllers
             //await _emailSender.SendMailAsync(email, subject, message);
 
 
+
+
             return View(listTicket);
         }
 
@@ -94,6 +96,19 @@ namespace testyoutube.Controllers
                 return RedirectToAction("Index", "Home");
             }
             return View(tickets);
+        }
+
+        public IActionResult ChangeStatus(int ticketId, int selectedStatus)
+        {
+            var ticket = _context.Tickets.Find(ticketId);
+            if (ticket != null)
+            {
+                ticket.ID_statut = selectedStatus;
+                ticket.Date_modif = DateTime.Now;
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
