@@ -57,7 +57,7 @@ namespace testyoutube.Areas.Identity.Pages.Account.Manage
             }
 
             _logger.LogInformation("User with ID '{UserId}' has disabled 2fa.", _userManager.GetUserId(User));
-            StatusMessage = "2fa has been disabled. You can reenable 2fa when you setup an authenticator app";
+            StatusMessage = "La double authentification a été désactivée. Vous pouvez la réactiver si vous le souhaitez";
             return RedirectToPage("./TwoFactorAuthentication");
         }
     }
