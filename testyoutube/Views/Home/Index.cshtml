@@ -15,8 +15,8 @@
 {
     <h1 class="text-white text-center">Vous êtes connectés</h1>
 
-    //@if (User.IsInRole("Admin"))
-    //{
+    @if (User.IsInRole("admin"))
+    {
         <h1 class="text-white text-center">Vous êtes un admin</h1>
         <h3 class="text-white">Liste des tickets</h3>
         <div class="neumorphism" style="margin-right: -45px;">
@@ -51,11 +51,11 @@
             </table>
         </div>                                 
                                                
-   //}                                          
-   //else                                       
-   //{
-   //    <h1 class="text-white text-center">Vous n'êtes pas un admin</h1>
-   //}
+   }                                          
+   else                                       
+   {
+      <h1 class="text-white text-center">Vous n'êtes pas un admin</h1>
+   }
 
 }
 else

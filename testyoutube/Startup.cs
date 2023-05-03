@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using testyoutube.Data;
 using testyoutube.Services;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Identity;
 
 namespace testyoutube
 {
@@ -25,6 +26,9 @@ namespace testyoutube
             services.AddDbContext<TicketDataContext>(options => options.UseMySQL(Configuration.GetConnectionString("TicketContext")));
             services.AddControllersWithViews();
             services.AddRazorPages();
+           // services.AddDefaultIdentity<IdentityUser>()
+           //     .AddRoles<IdentityRole>()
+           //     .AddEntityFrameworkStores<TicketDataContext>();
 
             services.AddTransient<Services.IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);

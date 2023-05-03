@@ -20,16 +20,17 @@ namespace testyoutube.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly TicketDataContext _context;
         private readonly IEmailSender _emailSender;
-
+        //private readonly RoleManager<IdentityRole> _roleManager;
         public HomeController(ILogger<HomeController> logger, TicketDataContext context, UserManager<testyoutubeUser> userManager, IEmailSender emailSender)
         {
             _logger = logger;
             _context = context;
             _userManager = userManager;
             this._emailSender = emailSender;
+            //_roleManager = roleManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> IndexAsync()
         {
            
             var listTicket = _context.Tickets.Include(t => t.Statut).ToList();
@@ -42,11 +43,42 @@ namespace testyoutube.Controllers
             //var message = "Hello World";
 
             //await _emailSender.SendMailAsync(email, subject, message);
+            //var user = await _userManager.FindByIdAsync(userId);
+            //
+            //if (User != null)
+            //{
+            //    var roleExists = await _roleManager.RoleExistsAsync("admin");
+            //
+            //    if (!roleExists)
+            //    {
+            //        await _roleManager.CreateAsync(new IdentityRole("admin"));
+            //    }
+            //
+            //    await _userManager.AddToRoleAsync(user, "admin");
+            //}
 
 
 
 
             return View(listTicket);
+        }
+
+        public async Task<IActionResult> AddUserToRoleAsync(string userId, string rolename)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            var result = await _userManager.AddToRoleAsync(user, rolename);
+
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
+            ModelState.AddModelError("", "Impossible d'ajouter l'utilisateur au rôle");
+            return View();
         }
 
         public IActionResult Privacy()

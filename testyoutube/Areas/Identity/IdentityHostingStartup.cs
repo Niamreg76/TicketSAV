@@ -21,6 +21,7 @@ namespace testyoutube.Areas.Identity
                         context.Configuration.GetConnectionString("testyoutubeContextConnection")));
 
                 services.AddDefaultIdentity<testyoutubeUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                    .AddRoles<IdentityRole>()
                     .AddEntityFrameworkStores<UserDataContext>();
             });
         }
