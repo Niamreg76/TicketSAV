@@ -30,9 +30,9 @@ namespace testyoutube.Controllers
             //_roleManager = roleManager;
         }
 
-        public async Task<IActionResult> IndexAsync()
+        public IActionResult Index()
         {
-           
+
             var listTicket = _context.Tickets.Include(t => t.Statut).ToList();
             var listTicket2 = _context.Tickets.Include(t => t.panne).ToList();
             //ViewBag.ID_panne = new SelectList(_context.panne, "ID_panne", "Description");
@@ -63,23 +63,6 @@ namespace testyoutube.Controllers
             return View(listTicket);
         }
 
-        public async Task<IActionResult> AddUserToRoleAsync(string userId, string rolename)
-        {
-            var user = await _userManager.FindByIdAsync(userId);
-            if (user == null)
-            {
-                return NotFound();
-            }
-            var result = await _userManager.AddToRoleAsync(user, rolename);
-
-            if (result.Succeeded)
-            {
-                return RedirectToAction("Index", "Admin");
-            }
-
-            ModelState.AddModelError("", "Impossible d'ajouter l'utilisateur au rôle");
-            return View();
-        }
 
         public IActionResult Privacy()
         {

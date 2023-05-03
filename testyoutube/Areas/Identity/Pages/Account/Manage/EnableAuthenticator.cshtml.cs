@@ -149,7 +149,7 @@ namespace testyoutube.Areas.Identity.Pages.Account.Manage
         {
             return string.Format(
                 AuthenticatorUriFormat,
-                _urlEncoder.Encode("testyoutube"),
+                _urlEncoder.Encode("TicketSystem"),
                 _urlEncoder.Encode(email),
                 unformattedKey);
         }
