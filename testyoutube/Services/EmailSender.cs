@@ -59,7 +59,7 @@ namespace testyoutube.Services
                 var client = new SmtpClient("smtp.gmail.com", 587)
                 {
                     EnableSsl = true,
-                    Credentials = new NetworkCredential("romanautomail123@gmail.com", "bupkjhsmkmqquagy")
+                    Credentials = new NetworkCredential("romanautomail123@gmail.com", "dupbcuegswbwwbdv")
                 };
 
                 return client.SendMailAsync(

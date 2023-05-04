@@ -1,8 +1,7 @@
-﻿
+﻿@model IEnumerable<testyoutube.Data.Tickets>
 @using Microsoft.AspNetCore.Identity
 @using testyoutube.Areas.Identity.Data
 
-@model List<testyoutube.Data.Tickets>
 @inject SignInManager<testyoutubeUser> SignInManager
 @inject UserManager<testyoutubeUser> UserManager
 
@@ -19,43 +18,142 @@
     {
         //<h1 class="text-white text-center">Vous êtes un admin</h1>
         <h3 class="text-white">Liste des tickets</h3>
-        <div class="neumorphism" style="margin-right: -45px;">
-            <table class="table table-bordered">
+        <div class="neumorphism">
+            <table class="table">
                 <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Titre</th>
-                        <th>Description</th>
-                        <th>Statut</th>
-                        <th>Date de création</th>
-                        <th>Date de modification</th>
-                        <th>Utilisateur</th>
-                        <th>Panne</th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ID_ticket)
+                        </th>
+                        <th>
+                            Nom d'utilisateur
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Titre)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Description)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Date_creation)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Date_modif)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Statut)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.panne)
+                        </th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var ticket in Model)
+                    @foreach (var item in Model)
                     {
                         <tr>
-                            <td>@ticket.ID_ticket</td>
-                            <td>@ticket.Titre</td>
-                            <td>@ticket.Description</td>
-                            <td>@ticket.Statut.Nom</td>
-                            <td>@ticket.Date_creation</td>
-                            <td>@ticket.Date_modif</td>
-                            <td>@UserManager.FindByIdAsync(ticket.ID_utilisateur).Result.UserName</td>
-                            <td>@ticket.panne.Description</td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ID_ticket)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => UserManager.FindByIdAsync(item.ID_utilisateur).Result.UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Titre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Date_creation)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Date_modif)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Statut.Nom)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.panne.Description)
+                            </td>
+                            <td>
+                                <a asp-controller="Tickets" asp-action="Edit" asp-route-id="@item.ID_ticket">Modifier</a> |
+                                <a asp-controller="Tickets" asp-action="Details" asp-route-id="@item.ID_ticket">Détails</a> |
+                                <a asp-controller="Tickets" asp-action="Delete" asp-route-id="@item.ID_ticket" class="text-danger">Supprimer</a>
+                            </td>
                         </tr>
                     }
                 </tbody>
             </table>
-        </div>                                 
-                                               
-   }                                          
-   else                                       
-   {
-      //<h1 class="text-white text-center">Vous n'êtes pas un admin</h1>
-   }
+
+        </div>
+
+
+    }
+    else
+    {
+        //<h1 class="text-white text-center">Vous n'êtes pas un admin</h1>
+        @if (!Model.Any(t => t.ID_utilisateur == UserManager.GetUserId(User)))
+        {
+            <h3 class="text-white">Aucun ticket trouvé</h3>
+        }
+        else
+        {
+            <h3 class="text-white">Liste des tickets</h3>
+            <div class="neumorphism" style="margin-right: -45px;">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Titre</th>
+                            <th>Description</th>
+                            <th>Statut</th>
+                            <th>Date de création</th>
+                            <th>Date de modification</th>
+                            <th>Utilisateur</th>
+                            <th>Panne</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Where(t => t.ID_utilisateur == UserManager.GetUserId(User)))
+                        {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ID_ticket)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => UserManager.FindByIdAsync(item.ID_utilisateur).Result.UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Titre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Date_creation)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Date_modif)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Statut.Nom)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.panne.Description)
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+
+
+
+
+    }
 
 }
 else

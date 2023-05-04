@@ -1,0 +1,68 @@
+﻿@model testyoutube.Data.Tickets
+
+@{
+    ViewData["Title"] = "Modifier";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-white">Modifier</h1>
+
+<div class="neumorphism">
+    <h4>Ticket</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="ID_ticket" />
+                <div class="form-group">
+                    <label asp-for="ID_utilisateur" class="control-label"></label>
+                    <input asp-for="ID_utilisateur" class="form-control" />
+                    <span asp-validation-for="ID_utilisateur" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Titre" class="control-label"></label>
+                    <input asp-for="Titre" class="form-control" />
+                    <span asp-validation-for="Titre" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ID_statut" class="control-label"></label>
+                    <select asp-for="ID_statut" class="form-control" asp-items="ViewBag.ID_statut"></select>
+                    <span asp-validation-for="ID_statut" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ID_panne" class="control-label"></label>
+                    <select asp-for="ID_panne" class="form-control" asp-items="ViewBag.ID_panne"></select>
+                    <span asp-validation-for="ID_panne" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Date_creation" class="control-label"></label>
+                    <input asp-for="Date_creation" class="form-control" readonly />
+                    <span asp-validation-for="Date_creation" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Date_modif" class="control-label"></label>
+                    <input asp-for="Date_modif" class="form-control" readonly />
+                    <span asp-validation-for="Date_modif" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Modifier" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Retour à la liste</a>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
