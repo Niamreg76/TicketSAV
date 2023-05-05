@@ -8,6 +8,7 @@ using testyoutube.Data;
 using testyoutube.Services;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Identity;
+using testyoutube.Hubs;
 
 namespace testyoutube
 {
@@ -26,6 +27,7 @@ namespace testyoutube
             services.AddDbContext<TicketDataContext>(options => options.UseMySQL(Configuration.GetConnectionString("TicketContext")));
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddSignalR();
            // services.AddDefaultIdentity<IdentityUser>()
            //     .AddRoles<IdentityRole>()
            //     .AddEntityFrameworkStores<TicketDataContext>();
@@ -61,6 +63,7 @@ namespace testyoutube
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+                endpoints.MapHub<ChatHub>("/chatHub");
             });
 
         }

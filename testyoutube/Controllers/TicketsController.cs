@@ -25,6 +25,11 @@ namespace testyoutube.Controllers
             return View(await ticketDataContext.ToListAsync());
         }
 
+        public IActionResult Chat(int? id)
+        {
+            return View();
+        }
+
         // GET: Tickets/Details/5
         public async Task<IActionResult> Details(int? id)
         {

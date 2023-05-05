@@ -86,6 +86,7 @@ body {
     background: #ededed;
     box-shadow: 5px 5px 0px #cecece, -5px -5px 0px #ffffff;
     padding: 25px;
+
 }
 
 .bg-spe {
@@ -201,4 +202,9 @@ body {
     z-index: 3;
     transform: translate3d(0, -5px, 11px);
     color: #ff0266;
+}
+
+.spanselec{
+    color: white;
+    user-select: none;
 }

@@ -18,7 +18,7 @@
     {
         //<h1 class="text-white text-center">Vous êtes un admin</h1>
         <h3 class="text-white">Liste des tickets</h3>
-        <div class="neumorphism">
+        <div class="neumorphism" style="margin-left: -125px; margin-right: -75px;">
             <table class="table">
                 <thead>
                     <tr>
@@ -29,10 +29,10 @@
                             Nom d'utilisateur
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Titre)
+                            @Html.DisplayNameFor(model => model.Titre)<span class="user-select-none" style="user-select: none; color: #ededed">yyyyyyyyyyy</span>
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Description)
+                            @Html.DisplayNameFor(model => model.Description)<span class="user-select-none" style="user-select: none; color: #ededed">yyyyyyyyyyy</span>
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.Date_creation)
@@ -44,7 +44,7 @@
                             @Html.DisplayNameFor(model => model.Statut)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.panne)
+                            @Html.DisplayNameFor(model => model.panne)<span class="user-select-none" style="user-select: none; color: #ededed">yyyyyyyyyyy</span>
                         </th>
                         <th></th>
                     </tr>
@@ -81,6 +81,7 @@
                                 <a asp-controller="Tickets" asp-action="Edit" asp-route-id="@item.ID_ticket">Modifier</a> |
                                 <a asp-controller="Tickets" asp-action="Details" asp-route-id="@item.ID_ticket">Détails</a> |
                                 <a asp-controller="Tickets" asp-action="Delete" asp-route-id="@item.ID_ticket" class="text-danger">Supprimer</a>
+                                <a asp-controller="Tickets" asp-action="Chat" asp-route-id="@item.ID_ticket">Discussion</a>
                             </td>
                         </tr>
                     }

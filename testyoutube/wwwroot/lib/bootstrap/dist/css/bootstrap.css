@@ -9848,6 +9848,10 @@ button.bg-dark:focus {
   color: #fff !important;
 }
 
+.user-select-none {
+    user-select: none !important;
+}
+
 .text-primary {
   color: #007bff !important;
 }
