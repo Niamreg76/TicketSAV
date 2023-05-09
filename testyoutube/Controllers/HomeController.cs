@@ -34,7 +34,7 @@ namespace testyoutube.Controllers
         {
 
             var listTicket = _context.Tickets.Include(t => t.Statut).ToList();
-            var listTicket2 = _context.Tickets.Include(t => t.panne).ToList();
+            var listTicket2 = _context.Tickets.Include(t => t.Panne).ToList();
             //ViewBag.ID_panne = new SelectList(_context.panne, "ID_panne", "Description");
             // ViewBag.ID_panne = new SelectList(_context.Statut, "ID_panne", "Description");
 
@@ -71,7 +71,7 @@ namespace testyoutube.Controllers
 
         public IActionResult Creation()
         {
-            var pannes = _context.panne.ToList();
+            var pannes = _context.Panne.ToList();
 
           
             var PanneSelectList = pannes.Select(s => new SelectListItem
@@ -94,7 +94,7 @@ namespace testyoutube.Controllers
                 tickets.Date_creation = DateTime.Now;
                 tickets.Date_modif = DateTime.Now;
 
-                var statut = _context.statut.FirstOrDefault(s => s.ID_statut == 1);
+                var statut = _context.Statut.FirstOrDefault(s => s.ID_statut == 1);
                 if (statut != null)
                 {
                     tickets.Statut = statut;

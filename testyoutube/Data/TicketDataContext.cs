@@ -15,8 +15,8 @@ namespace testyoutube.Data
         }
 
         public DbSet<Tickets> Tickets { get; set; }
-        public DbSet<Panne> panne { get; set;}
-        public DbSet<Statut> statut { get; set; }
+        public DbSet<Panne> Panne { get; set;}
+        public DbSet<Statut> Statut { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Conversation> Conversations { get; set; }
 
@@ -26,7 +26,7 @@ namespace testyoutube.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Tickets>()
-                .HasOne(t => t.panne)
+                .HasOne(t => t.Panne)
                 .WithMany()
                 .HasForeignKey(t => t.ID_panne);
 

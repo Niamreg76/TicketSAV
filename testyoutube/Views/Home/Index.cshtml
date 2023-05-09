@@ -44,7 +44,7 @@
                             @Html.DisplayNameFor(model => model.Statut)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.panne)<span class="user-select-none" style="user-select: none; color: #ededed">yyyyyyyyyyy</span>
+                            @Html.DisplayNameFor(model => model.Panne)<span class="user-select-none" style="user-select: none; color: #ededed">yyyyyyyyyyy</span>
                         </th>
                         <th></th>
                     </tr>
@@ -57,7 +57,7 @@
                                 @Html.DisplayFor(modelItem => item.ID_ticket)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => UserManager.FindByIdAsync(item.ID_utilisateur).Result.UserName)
+                                <a href="mailto:@Html.DisplayFor(modelItem => UserManager.FindByIdAsync(item.ID_utilisateur).Result.UserName)"></a>
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Titre)
@@ -75,7 +75,7 @@
                                 @Html.DisplayFor(modelItem => item.Statut.Nom)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.panne.Description)
+                                @Html.DisplayFor(modelItem => item.Panne.Description)
                             </td>
                             <td>
                                 <a asp-controller="Tickets" asp-action="Edit" asp-route-id="@item.ID_ticket">Modifier</a> |
@@ -142,7 +142,7 @@
                                 @Html.DisplayFor(modelItem => item.Statut.Nom)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.panne.Description)
+                                @Html.DisplayFor(modelItem => item.Panne.Description)
                             </td>
                         </tr>
                         }

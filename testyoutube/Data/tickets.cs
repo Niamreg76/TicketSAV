@@ -23,6 +23,6 @@ namespace testyoutube.Data
         public Statut Statut { get; set; }
 
         [ForeignKey("ID_panne")]
-        public Panne panne { get; set; }
+        public Panne Panne { get; set; }
     }
 }

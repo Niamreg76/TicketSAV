@@ -8,12 +8,7 @@ namespace testyoutube.Hubs
 {
     public class ChatHub : Hub
     {
-        private readonly TicketDataContext _context;
 
-        public ChatHub(TicketDataContext context)
-        {
-            _context = context;
-        }
         public async Task SendMessage( string message)
         {
             string user = Context.User.Identity.Name;

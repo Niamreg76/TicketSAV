@@ -21,7 +21,7 @@ namespace testyoutube.Controllers
         // GET: Tickets
         public async Task<IActionResult> Index()
         {
-            var ticketDataContext = _context.Tickets.Include(t => t.Statut).Include(t => t.panne);
+            var ticketDataContext = _context.Tickets.Include(t => t.Statut).Include(t => t.Panne);
             return View(await ticketDataContext.ToListAsync());
         }
 
@@ -40,7 +40,7 @@ namespace testyoutube.Controllers
 
             var tickets = await _context.Tickets
                 .Include(t => t.Statut)
-                .Include(t => t.panne)
+                .Include(t => t.Panne)
                 .FirstOrDefaultAsync(m => m.ID_ticket == id);
             if (tickets == null)
             {
@@ -53,8 +53,8 @@ namespace testyoutube.Controllers
         // GET: Tickets/Create
         public IActionResult Create()
         {
-            ViewData["ID_statut"] = new SelectList(_context.statut, "ID_statut", "ID_statut");
-            ViewData["ID_panne"] = new SelectList(_context.panne, "ID_panne", "ID_panne");
+            ViewData["ID_statut"] = new SelectList(_context.Statut, "ID_statut", "ID_statut");
+            ViewData["ID_panne"] = new SelectList(_context.Panne, "ID_panne", "ID_panne");
             return View();
         }
 
@@ -71,8 +71,8 @@ namespace testyoutube.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ID_statut"] = new SelectList(_context.statut, "ID_statut", "ID_statut", tickets.ID_statut);
-            ViewData["ID_panne"] = new SelectList(_context.panne, "ID_panne", "ID_panne", tickets.ID_panne);
+            ViewData["ID_statut"] = new SelectList(_context.Statut, "ID_statut", "ID_statut", tickets.ID_statut);
+            ViewData["ID_panne"] = new SelectList(_context.Panne, "ID_panne", "ID_panne", tickets.ID_panne);
             return View(tickets);
         }
 
@@ -89,8 +89,8 @@ namespace testyoutube.Controllers
             {
                 return NotFound();
             }
-            ViewData["ID_statut"] = new SelectList(_context.statut, "ID_statut", "ID_statut", tickets.ID_statut);
-            ViewData["ID_panne"] = new SelectList(_context.panne, "ID_panne", "ID_panne", tickets.ID_panne);
+            ViewData["ID_statut"] = new SelectList(_context.Statut, "ID_statut", "ID_statut", tickets.ID_statut);
+            ViewData["ID_panne"] = new SelectList(_context.Panne, "ID_panne", "ID_panne", tickets.ID_panne);
             return View(tickets);
         }
 
@@ -128,8 +128,8 @@ namespace testyoutube.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ID_statut"] = new SelectList(_context.statut, "ID_statut", "ID_statut", tickets.ID_statut);
-            ViewData["ID_panne"] = new SelectList(_context.panne, "ID_panne", "ID_panne", tickets.ID_panne);
+            ViewData["ID_statut"] = new SelectList(_context.Statut, "ID_statut", "ID_statut", tickets.ID_statut);
+            ViewData["ID_panne"] = new SelectList(_context.Panne, "ID_panne", "ID_panne", tickets.ID_panne);
             return View(tickets);
         }
 
@@ -143,7 +143,7 @@ namespace testyoutube.Controllers
 
             var tickets = await _context.Tickets
                 .Include(t => t.Statut)
-                .Include(t => t.panne)
+                .Include(t => t.Panne)
                 .FirstOrDefaultAsync(m => m.ID_ticket == id);
             if (tickets == null)
             {

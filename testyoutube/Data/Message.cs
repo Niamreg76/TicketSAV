@@ -13,7 +13,7 @@ namespace testyoutube.Data
         [Key]
         public int ID_message { get; set; }
         public string ID_utilisateur { get; set; }
-        public string contenu { get; set; }
+        public string Contenu { get; set; }
         public DateTime DateMessage { get; set; }
 
         public int ID_conversation { get; set; }
