@@ -12,13 +12,13 @@ namespace testyoutube.Areas.Identity.Pages.Account.Manage
 {
     public class ChangePasswordModel : PageModel
     {
-        private readonly UserManager<testyoutubeUser> _userManager;
-        private readonly SignInManager<testyoutubeUser> _signInManager;
+        private readonly UserManager<aspnetusers> _userManager;
+        private readonly SignInManager<aspnetusers> _signInManager;
         private readonly ILogger<ChangePasswordModel> _logger;
 
         public ChangePasswordModel(
-            UserManager<testyoutubeUser> userManager,
-            SignInManager<testyoutubeUser> signInManager,
+            UserManager<aspnetusers> userManager,
+            SignInManager<aspnetusers> signInManager,
             ILogger<ChangePasswordModel> logger)
         {
             _userManager = userManager;

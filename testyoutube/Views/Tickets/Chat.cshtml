@@ -1,88 +1,35 @@
 ﻿@page
 @using Microsoft.AspNetCore.Identity
 @using testyoutube.Areas.Identity.Data
-@model IEnumerable<testyoutube.Data.Tickets>
-@inject UserManager<testyoutubeUser> UserManager
+@inject UserManager<aspnetusers> UserManager
 
 <div class="neumorphism">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    ID
-                </th>
-                <th>
-                    Nom d'utilisateur
-                </th>
-                <th>
-                    Titre<span class="user-select-none" style="user-select: none; color: #ededed">yyyyyyyyyyy</span>
-                </th>
-                <th>
-                    Description<span class="user-select-none" style="user-select: none; color: #ededed">yyyyyyyyyyy</span>
-                </th>
-                <th>
-                    Date_création
-                </th>
-                <th>
-                    Date_modif
-                </th>
-                <th>
-                    Statut
-                </th>
-                <th>
-                    Panne<span class="user-select-none" style="user-select: none; color: #ededed">yyyyyyyyyyy</span>
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @*@foreach (var ticket in Model.Where(t => t.ID_ticket == 1))
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => ticket.ID_ticket)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => UserManager.FindByIdAsync(ticket.ID_utilisateur).Result.UserName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => ticket.Titre)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => ticket.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => ticket.Date_creation)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => ticket.Date_modif)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => ticket.Statut.Nom)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => ticket.panne.Description)
-                    </td>
-                </tr>
-            }*@
-        </tbody>
-    </table>
 
     <div class="container">
-        <div class="row p-1">
+        <div class="row p-1" id="chat">
             <div class="col-6">
-                <ul id="messagesList"></ul>
+                <ul id="messagesList">
+                    @foreach (var message in ViewBag.Messages)
+                    {
+                        <li>@message.User.Email : @message.Contenu</li>
+                    }
+                </ul>
             </div>
         </div>
-        <div class="row p-1">
-            <div class="col-1">Message</div>
-            <div class="col-5"><input type="text" class="w-100" id="messageInput" /></div>
-        </div>
-        <div class="row p-1">
-            <div class="col-6 text-end">
-                <input type="button" id="sendButton" value="Envoyer un message" />
+
+        <form asp-action="ChatCreate">
+            <div class="row p-1">
+                <div class="col-1">Message</div>
+                <div class="col-5"><input type="text" class="w-100" id="messageInput" name="messageInput" /></div>
+                <input type="hidden" name="conversationId" value="@ViewBag.ConversationId" />
             </div>
-        </div>
+            <div class="row p-1">
+                <div class="col-6 text-end">
+                    <input type="submit" id="sendButton" value="Envoyer un message" />
+                </div>
+            </div>
+        </form>
+
         <div class="row p-1">
             <div class="col-6">
                 <hr />

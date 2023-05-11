@@ -18,10 +18,10 @@ namespace testyoutube.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class ResendEmailConfirmationModel : PageModel
     {
-        private readonly UserManager<testyoutubeUser> _userManager;
+        private readonly UserManager<aspnetusers> _userManager;
         private readonly IEmailSender _emailSender;
 
-        public ResendEmailConfirmationModel(UserManager<testyoutubeUser> userManager, IEmailSender emailSender)
+        public ResendEmailConfirmationModel(UserManager<aspnetusers> userManager, IEmailSender emailSender)
         {
             _userManager = userManager;
             _emailSender = emailSender;
@@ -62,7 +62,7 @@ namespace testyoutube.Areas.Identity.Pages.Account
             var callbackUrl = Url.Page(
                 "/Account/ConfirmEmail",
                 pageHandler: null,
-                values: new { userId = userId, code = code },
+                values: new { userId, code },
                 protocol: Request.Scheme);
 
 /*            await _emailSender.SendEmailAsync(

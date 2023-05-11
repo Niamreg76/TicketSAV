@@ -1,8 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using testyoutube.Areas.Identity.Data
 
-@inject SignInManager<testyoutubeUser> SignInManager
-@inject UserManager<testyoutubeUser> UserManager
+@inject SignInManager<aspnetusers> SignInManager
+@inject UserManager<aspnetusers> UserManager
 
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))

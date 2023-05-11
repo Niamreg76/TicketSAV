@@ -16,9 +16,9 @@ namespace testyoutube.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class ResetPasswordModel : PageModel
     {
-        private readonly UserManager<testyoutubeUser> _userManager;
+        private readonly UserManager<aspnetusers> _userManager;
 
-        public ResetPasswordModel(UserManager<testyoutubeUser> userManager)
+        public ResetPasswordModel(UserManager<aspnetusers> userManager)
         {
             _userManager = userManager;
         }

@@ -12,13 +12,13 @@ namespace testyoutube.Areas.Identity.Pages.Account.Manage
 {
     public class ResetAuthenticatorModel : PageModel
     {
-        UserManager<testyoutubeUser> _userManager;
-        private readonly SignInManager<testyoutubeUser> _signInManager;
-        ILogger<ResetAuthenticatorModel> _logger;
+        readonly UserManager<aspnetusers> _userManager;
+        private readonly SignInManager<aspnetusers> _signInManager;
+        readonly ILogger<ResetAuthenticatorModel> _logger;
 
         public ResetAuthenticatorModel(
-            UserManager<testyoutubeUser> userManager,
-            SignInManager<testyoutubeUser> signInManager,
+            UserManager<aspnetusers> userManager,
+            SignInManager<aspnetusers> signInManager,
             ILogger<ResetAuthenticatorModel> logger)
         {
             _userManager = userManager;

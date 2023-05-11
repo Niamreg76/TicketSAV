@@ -19,11 +19,11 @@ namespace testyoutube.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class ForgotPasswordModel : PageModel
     {
-        private readonly UserManager<testyoutubeUser> _userManager;
+        private readonly UserManager<aspnetusers> _userManager;
         private readonly IEmailSender _emailSender;
 
 
-        public ForgotPasswordModel(UserManager<testyoutubeUser> userManager, IEmailSender emailSender)
+        public ForgotPasswordModel(UserManager<aspnetusers> userManager, IEmailSender emailSender)
         {
             _userManager = userManager;
             _emailSender = emailSender;

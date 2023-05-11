@@ -16,12 +16,12 @@ namespace testyoutube.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly UserManager<testyoutubeUser> _userManager;
+        private readonly UserManager<aspnetusers> _userManager;
         private readonly ILogger<HomeController> _logger;
         private readonly TicketDataContext _context;
         private readonly IEmailSender _emailSender;
         //private readonly RoleManager<IdentityRole> _roleManager;
-        public HomeController(ILogger<HomeController> logger, TicketDataContext context, UserManager<testyoutubeUser> userManager, IEmailSender emailSender)
+        public HomeController(ILogger<HomeController> logger, TicketDataContext context, UserManager<aspnetusers> userManager, IEmailSender emailSender)
         {
             _logger = logger;
             _context = context;
@@ -32,32 +32,10 @@ namespace testyoutube.Controllers
 
         public IActionResult Index()
         {
-
-            var listTicket = _context.Tickets.Include(t => t.Statut).ToList();
-            var listTicket2 = _context.Tickets.Include(t => t.Panne).ToList();
-            //ViewBag.ID_panne = new SelectList(_context.panne, "ID_panne", "Description");
-            // ViewBag.ID_panne = new SelectList(_context.Statut, "ID_panne", "Description");
-
-            //var email = "romangermain1@gmail.com";
-            //var subject = "Test";
-            //var message = "Hello World";
-
-            //await _emailSender.SendMailAsync(email, subject, message);
-            //var user = await _userManager.FindByIdAsync(userId);
-            //
-            //if (User != null)
-            //{
-            //    var roleExists = await _roleManager.RoleExistsAsync("admin");
-            //
-            //    if (!roleExists)
-            //    {
-            //        await _roleManager.CreateAsync(new IdentityRole("admin"));
-            //    }
-            //
-            //    await _userManager.AddToRoleAsync(user, "admin");
-            //}
-
-
+            var listTicket = _context.Tickets
+                .Include(t => t.Statut)
+                .Include(t => t.Panne)
+                .ToList();
 
 
             return View(listTicket);
@@ -87,12 +65,13 @@ namespace testyoutube.Controllers
             return View();
         }
 
-        public async Task<IActionResult> CreationButton(Tickets tickets)
+        public async Task<IActionResult> CreationButton(Tickets tickets, Conversation conversation)
         {
             if (ModelState.IsValid)
             {
                 tickets.Date_creation = DateTime.Now;
                 tickets.Date_modif = DateTime.Now;
+                tickets.ID_conversation = tickets.ID_ticket;
 
                 var statut = _context.Statut.FirstOrDefault(s => s.ID_statut == 1);
                 if (statut != null)
@@ -104,9 +83,23 @@ namespace testyoutube.Controllers
                 var user = await _userManager.GetUserAsync(User);
 
                 tickets.ID_utilisateur = user.Id;
-
                 _context.Tickets.Add(tickets);
                 await _context.SaveChangesAsync();
+
+
+                tickets.ID_conversation = tickets.ID_ticket;
+                await _context.SaveChangesAsync();
+
+                if (ModelState.IsValid)
+                {
+                    conversation.ID_conversation = tickets.ID_conversation;
+                    conversation.ID_ticket = tickets.ID_ticket;
+
+                    _context.Conversations.Add(conversation);
+                    await _context.SaveChangesAsync();
+                }
+
+
 
                 return RedirectToAction("Index", "Home");
             }

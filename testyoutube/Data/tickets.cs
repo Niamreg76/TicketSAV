@@ -18,11 +18,13 @@ namespace testyoutube.Data
         public int ID_panne { get; set; }
         public DateTime Date_creation { get; set; }
         public DateTime Date_modif { get; set; }
+        public int ID_conversation { get; set; }
 
         [ForeignKey("ID_statut")]
         public Statut Statut { get; set; }
 
         [ForeignKey("ID_panne")]
         public Panne Panne { get; set; }
+
     }
 }

@@ -1,8 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using testyoutube.Areas.Identity.Data
 
-@inject SignInManager<testyoutubeUser> SignInManager
-@inject UserManager<testyoutubeUser> UserManager
+@inject SignInManager<aspnetusers> SignInManager
+@inject UserManager<aspnetusers> UserManager
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,16 +12,19 @@
     <title>@ViewData["Title"] - TicketSystem</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="icon" href="https://www.smartlight-eu.com/Content/img/Logo-SMARTlight-Blanc-v2.png" />
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
+            <div class="container" style="padding: 0;">
+                <img src="https://www.smartlight-eu.com/Content/img/Logo-SMARTlight-Blanc-v2.png" alt="logo_smartlight" style="max-width: 10%; background-color: black;" />
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TicketSystem</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
@@ -44,14 +47,14 @@
         </nav>
 
     </header>
-    <div class="container">
+    <div class="container" style="padding: 30px;">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
     <footer class="border-top footer text-muted bg-white">
-        <div class="container">
+        <div class="container" style="padding: 0">
             &copy; 2023 - TicketSystem - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
 
         </div>

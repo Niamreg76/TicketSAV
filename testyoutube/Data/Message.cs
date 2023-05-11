@@ -19,7 +19,7 @@ namespace testyoutube.Data
         public int ID_conversation { get; set; }
 
         [ForeignKey("ID_utilisateur")]
-        public testyoutubeUser User { get; set; }
+        public aspnetusers User { get; set; }
 
         [ForeignKey("ID_conversation")]
         public Conversation Conversation { get; set; }

@@ -12,12 +12,12 @@ namespace testyoutube.Areas.Identity.Pages.Account.Manage
 {
     public class SetPasswordModel : PageModel
     {
-        private readonly UserManager<testyoutubeUser> _userManager;
-        private readonly SignInManager<testyoutubeUser> _signInManager;
+        private readonly UserManager<aspnetusers> _userManager;
+        private readonly SignInManager<aspnetusers> _signInManager;
 
         public SetPasswordModel(
-            UserManager<testyoutubeUser> userManager,
-            SignInManager<testyoutubeUser> signInManager)
+            UserManager<aspnetusers> userManager,
+            SignInManager<aspnetusers> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;

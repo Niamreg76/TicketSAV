@@ -16,17 +16,14 @@ namespace testyoutube.Areas.Identity.Pages.Account.Manage
 {
     public partial class EmailModel : PageModel
     {
-        private readonly UserManager<testyoutubeUser> _userManager;
-        private readonly SignInManager<testyoutubeUser> _signInManager;
+        private readonly UserManager<aspnetusers> _userManager;
         private readonly IEmailSender _emailSender;
 
         public EmailModel(
-            UserManager<testyoutubeUser> userManager,
-            SignInManager<testyoutubeUser> signInManager,
+            UserManager<aspnetusers> userManager,
             IEmailSender emailSender)
         {
             _userManager = userManager;
-            _signInManager = signInManager;
             _emailSender = emailSender;
         }
 
@@ -50,7 +47,7 @@ namespace testyoutube.Areas.Identity.Pages.Account.Manage
             public string NewEmail { get; set; }
         }
 
-        private async Task LoadAsync(testyoutubeUser user)
+        private async Task LoadAsync(aspnetusers user)
         {
             var email = await _userManager.GetEmailAsync(user);
             Email = email;
@@ -98,7 +95,7 @@ namespace testyoutube.Areas.Identity.Pages.Account.Manage
                 var callbackUrl = Url.Page(
                     "/Account/ConfirmEmailChange",
                     pageHandler: null,
-                    values: new { userId = userId, email = Input.NewEmail, code = code },
+                    values: new { userId, email = Input.NewEmail, code },
                     protocol: Request.Scheme);
                 await _emailSender.SendEmailAsync(
                     Input.NewEmail,
@@ -134,7 +131,7 @@ namespace testyoutube.Areas.Identity.Pages.Account.Manage
             var callbackUrl = Url.Page(
                 "/Account/ConfirmEmail",
                 pageHandler: null,
-                values: new { area = "Identity", userId = userId, code = code },
+                values: new { area = "Identity", userId, code },
                 protocol: Request.Scheme);
             await _emailSender.SendEmailAsync(
                 email,

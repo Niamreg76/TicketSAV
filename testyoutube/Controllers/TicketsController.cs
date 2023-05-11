@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using testyoutube.Areas.Identity.Data;
 using testyoutube.Data;
 
 namespace testyoutube.Controllers
@@ -12,10 +14,11 @@ namespace testyoutube.Controllers
     public class TicketsController : Controller
     {
         private readonly TicketDataContext _context;
-
-        public TicketsController(TicketDataContext context)
+        private readonly UserManager<aspnetusers> _userManager;
+        public TicketsController(TicketDataContext context, UserManager<aspnetusers> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Tickets
@@ -27,6 +30,16 @@ namespace testyoutube.Controllers
 
         public IActionResult Chat(int? id)
         {
+            ViewData["Title"] = "Discussion";
+            
+            var messages = _context.Messages
+                .Where(m => m.ID_conversation == id)
+                .Include(m => m.User)
+                .ToList();
+
+            ViewBag.ConversationId = id;
+            ViewBag.Messages = messages;
+            
             return View();
         }
 
@@ -126,7 +139,7 @@ namespace testyoutube.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
             ViewData["ID_statut"] = new SelectList(_context.Statut, "ID_statut", "ID_statut", tickets.ID_statut);
             ViewData["ID_panne"] = new SelectList(_context.Panne, "ID_panne", "ID_panne", tickets.ID_panne);
@@ -167,6 +180,39 @@ namespace testyoutube.Controllers
         private bool TicketsExists(int id)
         {
             return _context.Tickets.Any(e => e.ID_ticket == id);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChatCreate([Bind("ID_message,ID_utilisateur,Contenu,DateMessage,ID_conversation")] Message message, string messageInput, int conversationId)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var user = await _userManager.GetUserAsync(User);
+                    message.ID_utilisateur = user.Id;
+                    message.DateMessage = DateTime.Now;
+                    message.ID_conversation = conversationId;
+                    message.Contenu = messageInput;
+
+                    await _context.Messages.AddAsync(message);
+                    _context.Add(message);
+                    await _context.SaveChangesAsync();
+
+                    TempData["MessageSent"] = "Le message a été envoyé avec succès.";
+                    string referer = Request.Headers["Referer"].ToString();
+                    return Redirect(referer);
+                }
+                catch (Exception)
+                {
+                    TempData["MessageError"] = "Une erreur s'est produite lors de l'envoi du message.";
+                    // Rediriger vers une vue d'erreur ou afficher un message d'erreur approprié
+                }
+
+            }
+            return View();
         }
     }
 }

@@ -12,12 +12,12 @@ namespace testyoutube.Areas.Identity.Pages.Account.Manage
 {
     public partial class IndexModel : PageModel
     {
-        private readonly UserManager<testyoutubeUser> _userManager;
-        private readonly SignInManager<testyoutubeUser> _signInManager;
+        private readonly UserManager<aspnetusers> _userManager;
+        private readonly SignInManager<aspnetusers> _signInManager;
 
         public IndexModel(
-            UserManager<testyoutubeUser> userManager,
-            SignInManager<testyoutubeUser> signInManager)
+            UserManager<aspnetusers> userManager,
+            SignInManager<aspnetusers> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -38,7 +38,7 @@ namespace testyoutube.Areas.Identity.Pages.Account.Manage
             public string PhoneNumber { get; set; }
         }
 
-        private async Task LoadAsync(testyoutubeUser user)
+        private async Task LoadAsync(aspnetusers user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);

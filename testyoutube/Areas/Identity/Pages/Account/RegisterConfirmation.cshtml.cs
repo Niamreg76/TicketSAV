@@ -15,14 +15,12 @@ namespace testyoutube.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class RegisterConfirmationModel : PageModel
     {
-        private readonly UserManager<testyoutubeUser> _userManager;
-        private readonly IEmailSender _sender;
+        private readonly UserManager<aspnetusers> _userManager;
         private readonly IEmailSender _emailSender;
 
-        public RegisterConfirmationModel(UserManager<testyoutubeUser> userManager, IEmailSender sender, IEmailSender emailSender)
+        public RegisterConfirmationModel(UserManager<aspnetusers> userManager, IEmailSender emailSender)
         {
             _userManager = userManager;
-            _sender = sender;
             this._emailSender = emailSender;
         }
 
@@ -56,7 +54,7 @@ namespace testyoutube.Areas.Identity.Pages.Account
                 EmailConfirmationUrl = Url.Page(
                     "/Account/ConfirmEmail",
                     pageHandler: null,
-                    values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
+                    values: new { area = "Identity", userId, code, returnUrl },
                     protocol: Request.Scheme);
 
                 var message = "Bonjour, \n\n Cliquez sur le lien suivant pour confirmer l'adresse mail : \n\n " + EmailConfirmationUrl + " \n\n Ce message est généré automatiquement.";

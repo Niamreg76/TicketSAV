@@ -15,9 +15,9 @@ namespace testyoutube.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class ConfirmEmailModel : PageModel
     {
-        private readonly UserManager<testyoutubeUser> _userManager;
+        private readonly UserManager<aspnetusers> _userManager;
 
-        public ConfirmEmailModel(UserManager<testyoutubeUser> userManager)
+        public ConfirmEmailModel(UserManager<aspnetusers> userManager)
         {
             _userManager = userManager;
         }

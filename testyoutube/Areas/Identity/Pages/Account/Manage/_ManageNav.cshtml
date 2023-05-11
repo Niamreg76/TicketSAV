@@ -1,4 +1,4 @@
-﻿@inject SignInManager<testyoutubeUser> SignInManager
+﻿@inject SignInManager<aspnetusers> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }

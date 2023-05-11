@@ -2,8 +2,8 @@
 @using Microsoft.AspNetCore.Identity
 @using testyoutube.Areas.Identity.Data
 
-@inject SignInManager<testyoutubeUser> SignInManager
-@inject UserManager<testyoutubeUser> UserManager
+@inject SignInManager<aspnetusers> SignInManager
+@inject UserManager<aspnetusers> UserManager
 
 @{
     ViewData["Title"] = "Accueil";
@@ -18,7 +18,7 @@
     {
         //<h1 class="text-white text-center">Vous êtes un admin</h1>
         <h3 class="text-white">Liste des tickets</h3>
-        <div class="neumorphism" style="margin-left: -125px; margin-right: -75px;">
+        <div class="neumorphism" style="margin-left: -125px; margin-right: -90px;">
             <table class="table">
                 <thead>
                     <tr>
@@ -53,34 +53,34 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>
+                            <td >
                                 @Html.DisplayFor(modelItem => item.ID_ticket)
                             </td>
-                            <td>
-                                <a href="mailto:@Html.DisplayFor(modelItem => UserManager.FindByIdAsync(item.ID_utilisateur).Result.UserName)"></a>
+                            <td >
+                                <a href="mailto:@Html.DisplayFor(modelItem => UserManager.FindByIdAsync(item.ID_utilisateur).Result.UserName)">@Html.DisplayFor(modelItem => UserManager.FindByIdAsync(item.ID_utilisateur).Result.UserName)</a>
                             </td>
-                            <td>
+                            <td >
                                 @Html.DisplayFor(modelItem => item.Titre)
                             </td>
-                            <td>
+                            <td >
                                 @Html.DisplayFor(modelItem => item.Description)
                             </td>
-                            <td>
+                            <td >
                                 @Html.DisplayFor(modelItem => item.Date_creation)
                             </td>
-                            <td>
+                            <td >
                                 @Html.DisplayFor(modelItem => item.Date_modif)
                             </td>
-                            <td>
+                            <td >
                                 @Html.DisplayFor(modelItem => item.Statut.Nom)
                             </td>
-                            <td>
+                            <td >
                                 @Html.DisplayFor(modelItem => item.Panne.Description)
                             </td>
                             <td>
                                 <a asp-controller="Tickets" asp-action="Edit" asp-route-id="@item.ID_ticket">Modifier</a> |
                                 <a asp-controller="Tickets" asp-action="Details" asp-route-id="@item.ID_ticket">Détails</a> |
-                                <a asp-controller="Tickets" asp-action="Delete" asp-route-id="@item.ID_ticket" class="text-danger">Supprimer</a>
+                                <a asp-controller="Tickets" asp-action="Delete" asp-route-id="@item.ID_ticket" class="text-danger">Supprimer</a> |
                                 <a asp-controller="Tickets" asp-action="Chat" asp-route-id="@item.ID_ticket">Discussion</a>
                             </td>
                         </tr>
@@ -143,6 +143,9 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Panne.Description)
+                            </td>
+                            <td>
+                                <a asp-controller="Tickets" asp-action="Chat" asp-route-id="@item.ID_ticket">Discussion</a>
                             </td>
                         </tr>
                         }

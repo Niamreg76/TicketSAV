@@ -20,7 +20,7 @@ namespace testyoutube.Areas.Identity
                     options.UseMySQL(
                         context.Configuration.GetConnectionString("testyoutubeContextConnection")));
 
-                services.AddDefaultIdentity<testyoutubeUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                services.AddDefaultIdentity<aspnetusers>(options => options.SignIn.RequireConfirmedAccount = true)
                     .AddRoles<IdentityRole>()
                     .AddEntityFrameworkStores<UserDataContext>();
             });

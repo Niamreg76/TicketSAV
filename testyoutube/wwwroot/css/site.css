@@ -208,3 +208,7 @@ body {
     color: white;
     user-select: none;
 }
+
+.table td, .table th {
+    padding: 8px !important;
+}

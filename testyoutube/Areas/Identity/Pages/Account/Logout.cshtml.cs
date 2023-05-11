@@ -14,10 +14,10 @@ namespace testyoutube.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class LogoutModel : PageModel
     {
-        private readonly SignInManager<testyoutubeUser> _signInManager;
+        private readonly SignInManager<aspnetusers> _signInManager;
         private readonly ILogger<LogoutModel> _logger;
 
-        public LogoutModel(SignInManager<testyoutubeUser> signInManager, ILogger<LogoutModel> logger)
+        public LogoutModel(SignInManager<aspnetusers> signInManager, ILogger<LogoutModel> logger)
         {
             _signInManager = signInManager;
             _logger = logger;

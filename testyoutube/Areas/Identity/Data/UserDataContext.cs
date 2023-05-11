@@ -10,7 +10,7 @@ using testyoutube.Areas.Identity.Data;
 
 namespace testyoutube.Data
 {
-    public class UserDataContext : IdentityDbContext<testyoutubeUser>
+    public class UserDataContext : IdentityDbContext<aspnetusers>
     {
         public UserDataContext(DbContextOptions<UserDataContext> options)
             : base(options)
@@ -27,9 +27,9 @@ namespace testyoutube.Data
     }
 }
 
-public class ApplicationUserEntityConfiguration : IEntityTypeConfiguration<testyoutubeUser>
+public class ApplicationUserEntityConfiguration : IEntityTypeConfiguration<aspnetusers>
 {
-    public void Configure(EntityTypeBuilder<testyoutubeUser> builder)
+    public void Configure(EntityTypeBuilder<aspnetusers> builder)
     {
 
     }

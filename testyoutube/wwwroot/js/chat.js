@@ -26,7 +26,8 @@ document.getElementById("sendButton").addEventListener("click", function (event)
     connection.invoke("SendMessage", message).catch(function (err) {
         return console.error(err.toString());
     });
-    messageInput.value = ''; // réinitialiser l'input du message
+ 
     messageInput.focus();
-    event.preventDefault();
+
 });
+

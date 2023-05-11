@@ -15,10 +15,10 @@ namespace testyoutube.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class ConfirmEmailChangeModel : PageModel
     {
-        private readonly UserManager<testyoutubeUser> _userManager;
-        private readonly SignInManager<testyoutubeUser> _signInManager;
+        private readonly UserManager<aspnetusers> _userManager;
+        private readonly SignInManager<aspnetusers> _signInManager;
 
-        public ConfirmEmailChangeModel(UserManager<testyoutubeUser> userManager, SignInManager<testyoutubeUser> signInManager)
+        public ConfirmEmailChangeModel(UserManager<aspnetusers> userManager, SignInManager<aspnetusers> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +14,7 @@ namespace testyoutube.Controllers
     public class MessagesController : Controller
     {
         private readonly TicketDataContext _context;
-
+        private readonly UserManager<aspnetusers> _userManager;
         public MessagesController(TicketDataContext context)
         {
             _context = context;
@@ -50,7 +51,7 @@ namespace testyoutube.Controllers
         public IActionResult Create()
         {
             ViewData["ID_conversation"] = new SelectList(_context.Conversations, "ID_conversation", "ID_conversation");
-            ViewData["ID_utilisateur"] = new SelectList(_context.Set<Tickets>(), "Id", "Id");
+            ViewData["ID_utilisateur"] = new SelectList(_context.aspnetusers, "Id", "Id");
             return View();
         }
 
@@ -59,7 +60,7 @@ namespace testyoutube.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID_message,ID_utilisateur,contenu,DateMessage,ID_conversation")] Message message)
+        public async Task<IActionResult> Create([Bind("ID_message,ID_utilisateur,Contenu,DateMessage,ID_conversation")] Message message)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +87,7 @@ namespace testyoutube.Controllers
                 return NotFound();
             }
             ViewData["ID_conversation"] = new SelectList(_context.Conversations, "ID_conversation", "ID_conversation", message.ID_conversation);
-            ViewData["ID_utilisateur"] = new SelectList(_context.Set<Tickets>(), "Id", "Id", message.ID_utilisateur);
+            ViewData["ID_utilisateur"] = new SelectList(_context.aspnetusers, "Id", "Id");
             return View(message);
         }
 
@@ -95,7 +96,7 @@ namespace testyoutube.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID_message,ID_utilisateur,contenu,DateMessage,ID_conversation")] Message message)
+        public async Task<IActionResult> Edit(int id, [Bind("ID_message,ID_utilisateur,Contenu,DateMessage,ID_conversation")] Message message)
         {
             if (id != message.ID_message)
             {
@@ -161,6 +162,38 @@ namespace testyoutube.Controllers
         private bool MessageExists(int id)
         {
             return _context.Messages.Any(e => e.ID_message == id);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChatCreate([Bind("ID_message,ID_utilisateur,Contenu,DateMessage,ID_conversation")] Message message)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var user = await _userManager.GetUserAsync(User);
+                    message.ID_utilisateur = user.Id;
+                    message.DateMessage = DateTime.Now;
+                    message.ID_conversation = 1;
+
+                    await _context.Messages.AddAsync(message);
+                    _context.Add(message);
+                    await _context.SaveChangesAsync();
+
+                    TempData["MessageSent"] = "Le message a été envoyé avec succès.";
+                    return Ok();
+                }
+                catch (Exception)
+                {
+                    TempData["MessageError"] = "Une erreur s'est produite lors de l'envoi du message.";
+                    // Rediriger vers une vue d'erreur ou afficher un message d'erreur approprié
+                }
+
+            }
+
+            return View(message);
         }
     }
 }

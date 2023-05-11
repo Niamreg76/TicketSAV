@@ -151,7 +151,7 @@ namespace testyoutube.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("testyoutube.Areas.Identity.Data.testyoutubeUser", b =>
+            modelBuilder.Entity("testyoutube.Areas.Identity.Data.aspnetusers", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("varchar(767)");
@@ -226,7 +226,7 @@ namespace testyoutube.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("testyoutube.Areas.Identity.Data.testyoutubeUser", null)
+                    b.HasOne("testyoutube.Areas.Identity.Data.aspnetusers", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -235,7 +235,7 @@ namespace testyoutube.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("testyoutube.Areas.Identity.Data.testyoutubeUser", null)
+                    b.HasOne("testyoutube.Areas.Identity.Data.aspnetusers", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -250,7 +250,7 @@ namespace testyoutube.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("testyoutube.Areas.Identity.Data.testyoutubeUser", null)
+                    b.HasOne("testyoutube.Areas.Identity.Data.aspnetusers", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -259,7 +259,7 @@ namespace testyoutube.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("testyoutube.Areas.Identity.Data.testyoutubeUser", null)
+                    b.HasOne("testyoutube.Areas.Identity.Data.aspnetusers", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
