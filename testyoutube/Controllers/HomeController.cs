@@ -33,22 +33,21 @@ namespace testyoutube.Controllers
         public IActionResult Index()
         {
             var listTicket = _context.Tickets
-                .Include(t => t.Statut)
+                .Include(t => t.Statut) 
                 .Include(t => t.Panne)
                 .ToList();
-
 
             return View(listTicket);
         }
 
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        public IActionResult Creation()
-        {
+        public IActionResult Privacy()                            
+        {                                                         
+            return View();                                        
+        }                                                         
+                                                                  
+        public IActionResult Creation()                           
+        {                                                         
             var pannes = _context.Panne.ToList();
 
           
@@ -98,8 +97,6 @@ namespace testyoutube.Controllers
                     _context.Conversations.Add(conversation);
                     await _context.SaveChangesAsync();
                 }
-
-
 
                 return RedirectToAction("Index", "Home");
             }
