@@ -34,14 +34,32 @@ namespace testyoutube.Controllers
         public async Task<IActionResult> Chat(int? id)
         {
             ViewData["Title"] = "Discussion";
-            
+
+            var tickets = _context.Tickets
+                .Include(t => t.Statut)
+                .Include(t => t.Panne)
+                .FirstOrDefault(t => t.ID_ticket == id);
+
             var messages = _context.Messages
                 .Where(m => m.ID_conversation == id)
                 .Include(m => m.User)
                 .ToList();
 
+            var panne = _context.Panne.FirstOrDefault(p => p.ID_panne == tickets.ID_panne);
+            var statut = _context.Statut.FirstOrDefault(s => s.ID_statut == tickets.ID_statut);
+
+            ViewBag.TicketID = tickets.ID_ticket;
+            ViewBag.UserID = await _userManager.FindByIdAsync(tickets.ID_utilisateur);
+            ViewBag.Titre = tickets.Titre;
+            ViewBag.Description = tickets.Description;
+            ViewBag.StatutID = statut.Nom;
+            ViewBag.PanneID = panne.Description;
+            ViewBag.DateCreation = tickets.Date_creation;
+            ViewBag.DateModif = tickets.Date_modif;
+
             ViewBag.ConversationId = id;
             ViewBag.Messages = messages;
+ 
 
             var ticket = _context.Tickets.FirstOrDefault(t => t.ID_ticket == id);
 
@@ -60,6 +78,12 @@ namespace testyoutube.Controllers
                 // L'utilisateur actuel n'est pas autorisé à accéder au chat du ticket, renvoyer une vue ou une redirection vers une page d'erreur d'autorisation
                 return Unauthorized();
             }
+
+            var listTicket = _context.Tickets
+                .Include(t => t.Statut)
+                .Include(t => t.Panne)
+                .ToList();
+
 
             return View();
         }

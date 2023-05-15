@@ -4,43 +4,106 @@
 @inject UserManager<aspnetusers> UserManager
 @inject SignInManager<aspnetusers> SignInManager
 
+
 @if (SignInManager.IsSignedIn(User))
 {
-        <div class="neumorphism">
+<div class="neumorphism">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    ID ticket
+                </th>
+                <th>
+                    Nom d'utilisateur
+                </th>
+                <th>
+                    Titre
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Date de création
+                </th>
+                <th>
+                    De de modification
+                </th>
+                <th>
+                    Statut
+                </th>
+                <th>
+                    Panne
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @ViewBag.TicketID
+                </td>
+                <td>
+                    @ViewBag.UserID
+                </td>
+                <td>
+                    @ViewBag.Titre
+                </td>
+                <td>
+                    @ViewBag.Description
+                </td>
+                <td>
+                    @ViewBag.DateCreation
+                </td>
+                <td>
+                    @ViewBag.DateModif
+                </td>
+                <td>
+                    @ViewBag.StatutID
+                </td>
+                <td>
+                    @ViewBag.PanneID
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <hr />
+        <div class="container">
+            <div class="row p-1" id="chat">
+                <div class="col-6">
+                    <ul id="messagesList" class="">
+                        @foreach (var message in ViewBag.Messages)
+                        {
+                            var currentUserEmail = User.Identity.Name;
+                            var isCurrentUserMessage = message.User.Email == currentUserEmail;
 
-            <div class="container">
-                <div class="row p-1" id="chat">
-                    <div class="col-6">
-                        <ul id="messagesList" class="">
-                            @foreach (var message in ViewBag.Messages)
-                            {
-                                <li class="">@message.User.Email : @message.Contenu</li>
-                            }
-                        </ul>
+                            <li class="@(isCurrentUserMessage ? "message" : "")">@message.User.Email : @message.Contenu</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+
+            <form asp-action="ChatCreate">
+                <div class="row p-1">
+                    <div class="col-1">Message</div>
+                    <div class="col-5"><input type="text" class="w-100" id="messageInput" name="messageInput" /></div>
+                    <input type="hidden" name="conversationId" value="@ViewBag.ConversationId" />
+                </div>
+                <div class="row p-1">
+                    <div class="col-6 text-end">
+                        <input type="submit" id="sendButton" value="Envoyer un message" />
                     </div>
                 </div>
+            </form>
 
-                <form asp-action="ChatCreate">
-                    <div class="row p-1">
-                        <div class="col-1">Message</div>
-                        <div class="col-5"><input type="text" class="w-100" id="messageInput" name="messageInput" /></div>
-                        <input type="hidden" name="conversationId" value="@ViewBag.ConversationId" />
-                    </div>
-                    <div class="row p-1">
-                        <div class="col-6 text-end">
-                            <input type="submit" id="sendButton" value="Envoyer un message" />
-                        </div>
-                    </div>
-                </form>
-
-                <div class="row p-1">
-                    <div class="col-6">
-                        <hr />
-                        <a asp-controller="Home" asp-action="Index">Retour à la liste</a>
-                    </div>
+            <div class="row p-1">
+                <div class="col-6">
+                    <hr />
+                    <a asp-controller="Home" asp-action="Index">Retour à la liste</a>
                 </div>
             </div>
         </div>
+</div>
 }
 else
 {
@@ -53,3 +116,20 @@ else
 
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/chat.js"></script>
+
+<style>
+    #chat{
+        margin-right: -1000px;
+    }
+    .message{
+        background-color: #1877F2;
+        color: #FFFFFF;
+        border-radius: 10px;
+        padding: 5px;
+        margin-bottom: 10px;
+        margin-left: 500px;
+    }
+    li{
+        list-style-type: none;
+    }
+</style>
