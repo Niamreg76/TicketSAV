@@ -15,7 +15,6 @@ namespace testyoutube.Data
         public string ID_utilisateur { get; set; }
         public string Contenu { get; set; }
         public DateTime DateMessage { get; set; }
-
         public int ID_conversation { get; set; }
 
         [ForeignKey("ID_utilisateur")]

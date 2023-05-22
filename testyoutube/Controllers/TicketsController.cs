@@ -60,7 +60,6 @@ namespace testyoutube.Controllers
             ViewBag.ConversationId = id;
             ViewBag.Messages = messages;
  
-
             var ticket = _context.Tickets.FirstOrDefault(t => t.ID_ticket == id);
 
             var user = await _userManager.GetUserAsync(User);
@@ -83,7 +82,6 @@ namespace testyoutube.Controllers
                 .Include(t => t.Statut)
                 .Include(t => t.Panne)
                 .ToList();
-
 
             return View();
         }
@@ -271,7 +269,6 @@ namespace testyoutube.Controllers
         {
             return _context.Tickets.Any(e => e.ID_ticket == id);
         }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]

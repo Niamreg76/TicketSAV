@@ -21,7 +21,7 @@ namespace testyoutube.Data
         public DbSet<Message> Messages { get; set; }
         public DbSet<Conversation> Conversations { get; set; }
         public DbSet<aspnetusers> aspnetusers { get; set; }
-
+        public DbSet<CategPanne> CategPanne { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -36,7 +36,6 @@ namespace testyoutube.Data
                 .HasOne(t => t.Statut)
                 .WithMany()
                 .HasForeignKey(t => t.ID_statut);
-
 
         }
     }

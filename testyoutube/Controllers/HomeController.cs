@@ -40,7 +40,6 @@ namespace testyoutube.Controllers
             return View(listTicket);
         }
 
-
         public IActionResult Privacy()                            
         {                                                         
             return View();                                        
@@ -50,6 +49,13 @@ namespace testyoutube.Controllers
         {                                                         
             var pannes = _context.Panne.ToList();
 
+            var categories = _context.CategPanne.ToList();
+
+            var CategPanneSelectList = categories.Select(s => new SelectListItem
+            {
+                Value = s.ID_CategPanne.ToString(),
+                Text = s.Nom
+            }).ToList();
           
             var PanneSelectList = pannes.Select(s => new SelectListItem
             {
@@ -58,8 +64,10 @@ namespace testyoutube.Controllers
             }).ToList();
      
             PanneSelectList.Insert(0, new SelectListItem { Value = "", Text = "" });
+            CategPanneSelectList.Insert(0, new SelectListItem { Value = "", Text = "" });
 
             ViewBag.ID_panne = PanneSelectList;
+            ViewBag.Categ = CategPanneSelectList;
 
             return View();
         }
@@ -116,11 +124,24 @@ namespace testyoutube.Controllers
             return RedirectToAction("Index");
         }
 
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        public IActionResult GetPannesByCategoryId(int categoryId)
+        {
+            var pannes = _context.Panne.Where(p => p.ID_categPanne == categoryId).ToList();
+
+            var panneSelectList = pannes.Select(p => new SelectListItem
+            {
+                Value = p.ID_panne.ToString(),
+                Text = p.Description
+            }).ToList();
+
+            return Json(panneSelectList);
+        }
     }
+
+
 }

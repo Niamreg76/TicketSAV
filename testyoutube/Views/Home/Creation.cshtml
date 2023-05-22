@@ -7,60 +7,80 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 @if (SignInManager.IsSignedIn(User))
 {
-<h1 class="text-white">Creation</h1>
-
-<div class="neumorphism">
-    <h4>Tickets</h4>
-    <hr />
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-action="CreationButton">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                @*<div class="form-group">
-                        <label asp-for="ID_utilisateur" class="control-label"></label>
-                        <input asp-for="ID_utilisateur" class="form-control" />
-                        <span asp-validation-for="ID_utilisateur" class="text-danger"></span>
-                    </div>*@
-                <div class="form-group">
-                    <label asp-for="Titre" class="control-label"></label>
-                    <input asp-for="Titre" class="form-control" />
-                    <span asp-validation-for="Titre" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Description" class="control-label"></label>
-                    <textarea asp-for="Description" class="form-control" rows="5"></textarea>
-                    <span asp-validation-for="Description" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="ID_panne" class="control-label">Anomalie</label>
-                    <select asp-for="ID_panne" class="form-control" asp-items="ViewBag.ID_panne"></select>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Créer" class="btn btn-primary" /> 
-                </div>
-            </form>
+    <h1 class="text-white">Creation</h1>
+    <div class="neumorphism">
+        <h4>Tickets</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="CreationButton">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    @*<div class="form-group">
+                            <label asp-for="ID_utilisateur" class="control-label"></label>
+                            <input asp-for="ID_utilisateur" class="form-control" />
+                            <span asp-validation-for="ID_utilisateur" class="text-danger"></span>
+                        </div>*@
+                    <div class="form-group">
+                        <label asp-for="Titre" class="control-label"></label>
+                        <input asp-for="Titre" class="form-control" />
+                        <span asp-validation-for="Titre" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <textarea asp-for="Description" class="form-control" rows="5"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Catégorie de panne</label>
+                        <select id="categSelect" class="form-control" asp-items="ViewBag.Categ"></select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ID_panne" class="control-label">Anomalie</label>
+                        <select asp-for="ID_panne" class="form-control" asp-items="ViewBag.ID_panne"></select>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Créer" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div>
+            <a asp-action="Index">Retour</a>
         </div>
     </div>
-    <div>
-        <a asp-action="Index">Retour</a>
-    </div>
-</div>
 }
 else
 {
-<div class="text-center text-white">
-    <h1 class="display-4">Support Ticket</h1>
-    <p>Connectez-vous ou inscrivez-vous en haut de la page</p>
-</div>
+    <div class="text-center text-white">
+        <h1 class="display-4">Support Ticket</h1>
+        <p>Connectez-vous ou inscrivez-vous en haut de la page</p>
+    </div>
 }
-
-
-
-
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+            // Écouteur d'événement pour le changement de valeur de la première liste déroulante
+            $('#categSelect').change(function () {
+                var selectedCategoryId = $(this).val(); // Récupère l'ID de la catégorie sélectionnée
+
+                // Effectue une requête AJAX pour récupérer les pannes de la catégorie sélectionnée
+                $.get('/Home/GetPannesByCategoryId', { categoryId: selectedCategoryId }, function (data) {
+                    // Remplace les options de la deuxième liste déroulante avec les nouvelles options
+                    var panneSelect = $('#ID_panne');
+                    panneSelect.empty();
+                    $.each(data, function (index, item) {
+                        panneSelect.append($('<option>', {
+                            value: item.value,
+                            text: item.text
+                        }));
+                    });
+                });
+            });
+        });
+    </script>
+
 }

@@ -164,7 +164,6 @@ namespace testyoutube.Controllers
             return _context.Messages.Any(e => e.ID_message == id);
         }
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ChatCreate([Bind("ID_message,ID_utilisateur,Contenu,DateMessage,ID_conversation")] Message message)

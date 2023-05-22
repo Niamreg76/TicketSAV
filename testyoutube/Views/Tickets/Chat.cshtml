@@ -4,7 +4,6 @@
 @inject UserManager<aspnetusers> UserManager
 @inject SignInManager<aspnetusers> SignInManager
 
-
 @if (SignInManager.IsSignedIn(User))
 {
 <div class="neumorphism">
@@ -77,12 +76,11 @@
                             var currentUserEmail = User.Identity.Name;
                             var isCurrentUserMessage = message.User.Email == currentUserEmail;
 
-                            <li class="@(isCurrentUserMessage ? "message" : "")">@message.User.Email : @message.Contenu</li>
+                            <li class="@(isCurrentUserMessage ? "message" : "")">@message.User.Email <span>   @message.DateMessage.ToString("HH:mm")</span> : @message.Contenu </li>
                         }
                     </ul>
                 </div>
             </div>
-
             <form asp-action="ChatCreate">
                 <div class="row p-1">
                     <div class="col-1">Message</div>
@@ -95,7 +93,6 @@
                     </div>
                 </div>
             </form>
-
             <div class="row p-1">
                 <div class="col-6">
                     <hr />
@@ -113,7 +110,6 @@ else
     </div>
 }
 
-
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/chat.js"></script>
 
@@ -128,6 +124,7 @@ else
         padding: 5px;
         margin-bottom: 10px;
         margin-left: 500px;
+        word-wrap: break-word;
     }
     li{
         list-style-type: none;
