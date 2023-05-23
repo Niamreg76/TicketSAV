@@ -10,6 +10,10 @@
 
 }
 
+<head>
+    <link rel="stylesheet" href="~/css/responsive.css" />
+</head>
+
 @if (SignInManager.IsSignedIn(User))
 {
     //<h1 class="text-white text-center">Vous êtes connectés</h1>
@@ -18,8 +22,8 @@
     {
         //<h1 class="text-white text-center">Vous êtes un admin</h1>
         <h3 class="text-white">Liste des tickets</h3>
-        <div class="neumorphism" style="margin-left: -125px; margin-right: -90px;">
-            <table class="table">
+        <div class="neumorphism">
+            <table class="table table-responsive">
                 <thead>
                     <tr>
                         <th>

@@ -4,6 +4,10 @@
 @inject UserManager<aspnetusers> UserManager
 @inject SignInManager<aspnetusers> SignInManager
 
+    <head>
+        <link rel="stylesheet" href="~/css/Chatcss.css" />
+    </head>
+
 @if (SignInManager.IsSignedIn(User))
 {
 <div class="neumorphism">
@@ -83,13 +87,15 @@
             </div>
             <form asp-action="ChatCreate">
                 <div class="row p-1">
-                    <div class="col-1">Message</div>
-                    <div class="col-5"><input type="text" class="w-100" id="messageInput" name="messageInput" /></div>
+                    <div class="col-1 titulo">Message</div>
+                    <div class="col-5">
+                        <input type="text" class="w-100" id="messageInput" name="messageInput" maxlength="800" />
+                    </div>
                     <input type="hidden" name="conversationId" value="@ViewBag.ConversationId" />
                 </div>
                 <div class="row p-1">
                     <div class="col-6 text-end">
-                        <input type="submit" id="sendButton" value="Envoyer un message" />
+                        <input type="submit" id="sendButton" class="btn btn-primary" value="Envoyer un message" />
                     </div>
                 </div>
             </form>
@@ -112,21 +118,3 @@ else
 
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/chat.js"></script>
-
-<style>
-    #chat{
-        margin-right: -1000px;
-    }
-    .message{
-        background-color: #1877F2;
-        color: #FFFFFF;
-        border-radius: 10px;
-        padding: 5px;
-        margin-bottom: 10px;
-        margin-left: 500px;
-        word-wrap: break-word;
-    }
-    li{
-        list-style-type: none;
-    }
-</style>

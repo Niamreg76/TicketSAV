@@ -27,6 +27,10 @@ a {
     border-color: #1861ac;
 }
 
+.rower{
+    margin-right: -300px;
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
@@ -38,6 +42,24 @@ html {
 @media (min-width: 768px) {
     html {
         font-size: 16px;
+    }
+}
+
+@media (max-width: 1485px) {
+    table {
+        padding: 0;
+    }
+}
+
+@media (max-width: 376px) {
+    html {
+        overflow: scroll !important;
+    }
+}
+
+@media (max-width: 765px;){
+    .row{
+        margin-right: -15px;
     }
 }
 

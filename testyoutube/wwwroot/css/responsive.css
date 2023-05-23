@@ -1,0 +1,26 @@
+﻿body {
+
+}
+@media (min-width: 670px){
+    .neumorphism{
+        margin-left: -90px;
+        margin-right: -125px;
+    }
+}
+
+@media (max-width: 1010px){
+    body{
+        font-size: 0.7rem;
+        line-height: 0.8;
+    }
+}
+
+@media (max-width: 669px){
+    .neumorphism{
+        margin-left: -20px;
+        margin-right: 0px;
+    }
+    body{
+        font-size: 0.7rem;
+    }
+}
