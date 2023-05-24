@@ -21,7 +21,10 @@
     @if (User.IsInRole("admin"))
     {
         //<h1 class="text-white text-center">Vous êtes un admin</h1>
-        <h3 class="text-white">Liste des tickets</h3>
+        <div class="recherche">
+            <h3 class="text-white">Liste des tickets</h3>
+            <input type="text" id="searchInput" placeholder="Rechercher un ticket..." class="arrondir" />
+        </div>
         <div class="neumorphism">
             <table class="table table-responsive">
                 <thead>
@@ -57,28 +60,28 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td >
+                            <td>
                                 @Html.DisplayFor(modelItem => item.ID_ticket)
                             </td>
-                            <td >
+                            <td>
                                 <a href="mailto:@Html.DisplayFor(modelItem => UserManager.FindByIdAsync(item.ID_utilisateur).Result.UserName)">@Html.DisplayFor(modelItem => UserManager.FindByIdAsync(item.ID_utilisateur).Result.UserName)</a>
                             </td>
-                            <td >
+                            <td>
                                 @Html.DisplayFor(modelItem => item.Titre)
                             </td>
-                            <td >
+                            <td>
                                 @Html.DisplayFor(modelItem => item.Description)
                             </td>
-                            <td >
+                            <td>
                                 @Html.DisplayFor(modelItem => item.Date_creation)
                             </td>
-                            <td >
+                            <td>
                                 @Html.DisplayFor(modelItem => item.Date_modif)
                             </td>
-                            <td >
+                            <td>
                                 @Html.DisplayFor(modelItem => item.Statut.Nom)
                             </td>
-                            <td >
+                            <td>
                                 @Html.DisplayFor(modelItem => item.Panne.Description)
                             </td>
                             <td>
@@ -102,7 +105,10 @@
         }
         else
         {
-            <h3 class="text-white">Liste des tickets</h3>
+            <div class="recherche">
+                <h3 class="text-white">Liste des tickets</h3>
+                <input type="text" id="searchInput" placeholder="Rechercher un ticket..." class="arrondir" />
+            </div>
             <div class="neumorphism" style="margin-right: -45px;">
                 <table class="table table-bordered">
                     <thead>
@@ -120,35 +126,35 @@
                     <tbody>
                         @foreach (var item in Model.Where(t => t.ID_utilisateur == UserManager.GetUserId(User)))
                         {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ID_ticket)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => UserManager.FindByIdAsync(item.ID_utilisateur).Result.UserName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Titre)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Description)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Date_creation)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Date_modif)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Statut.Nom)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Panne.Description)
-                            </td>
-                            <td>
-                                <a asp-controller="Tickets" asp-action="Chat" asp-route-id="@item.ID_ticket">Discussion</a>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ID_ticket)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => UserManager.FindByIdAsync(item.ID_utilisateur).Result.UserName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Titre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Date_creation)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Date_modif)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Statut.Nom)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Panne.Description)
+                                </td>
+                                <td>
+                                    <a asp-controller="Tickets" asp-action="Chat" asp-route-id="@item.ID_ticket">Discussion</a>
+                                </td>
+                            </tr>
                         }
                     </tbody>
                 </table>
@@ -163,3 +169,5 @@ else
         <p>Connectez-vous ou inscrivez-vous en haut de la page</p>
     </div>
 }
+
+<script src="~/js/Recherche.js" asp-append-version="true"></script>

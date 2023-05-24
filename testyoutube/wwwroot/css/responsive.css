@@ -24,3 +24,28 @@
         font-size: 0.7rem;
     }
 }
+
+.recherche{
+    display: flex;
+    margin-bottom: 20px;
+}
+.recherche input{
+    margin-left: 15%;
+    width: 40%;
+}
+
+.arrondir{
+    border-radius: 5px;
+}
+
+@media (max-width: 450px){
+    .recherche{
+        flex-direction: column;
+    }
+}
+@media (min-width: 451px){
+    .recherche{
+        flex-direction: row;
+    }
+}
+
