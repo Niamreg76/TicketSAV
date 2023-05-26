@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using testyoutube.Areas.Identity.Data;
+using IEmailSender = testyoutube.Services.IEmailSender;
 
 namespace testyoutube.Areas.Identity.Pages.Account.Manage
 {
@@ -71,7 +72,7 @@ namespace testyoutube.Areas.Identity.Pages.Account.Manage
             await LoadAsync(user);
             return Page();
         }
-
+        
         public async Task<IActionResult> OnPostChangeEmailAsync()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -97,10 +98,14 @@ namespace testyoutube.Areas.Identity.Pages.Account.Manage
                     pageHandler: null,
                     values: new { userId, email = Input.NewEmail, code },
                     protocol: Request.Scheme);
-                await _emailSender.SendEmailAsync(
-                    Input.NewEmail,
-                    "Confirm your email",
-                    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                /*                await _emailSender.SendEmailAsync(
+                                    Input.NewEmail,
+                                    "Confirm your email",
+                                    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");*/
+
+                var message = "Bonjour, \n\n Cliquez sur le lien suivant pour vérifier votre adresse mail : \n\n " + callbackUrl + " \n\n Ce message est généré automatiquement.";
+
+                await _emailSender.SendMailAsync(Input.NewEmail, "Confirmation de mail", message);
 
                 StatusMessage = "Confirmation link to change email sent. Please check your email.";
                 return RedirectToPage();
@@ -133,10 +138,14 @@ namespace testyoutube.Areas.Identity.Pages.Account.Manage
                 pageHandler: null,
                 values: new { area = "Identity", userId, code },
                 protocol: Request.Scheme);
-            await _emailSender.SendEmailAsync(
+            /*await _emailSender.SendEmailAsync(
                 email,
                 "Confirm your email",
-                $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");*/
+
+            var message = "Bonjour, \n\n Cliquez sur le lien suivant pour vérifier votre adresse mail : \n\n " + callbackUrl + " \n\n Ce message est généré automatiquement.";
+
+            await _emailSender.SendMailAsync(email, "Confirmation de mail", message);
 
             StatusMessage = "Verification email sent. Please check your email.";
             return RedirectToPage();
