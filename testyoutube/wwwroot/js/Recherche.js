@@ -14,10 +14,12 @@
             const ticketTitle = row.querySelector("td:nth-child(3)").textContent.toLowerCase();
             const ticketDescription = row.querySelector("td:nth-child(4)").textContent.toLowerCase();
             const ticketDateCrea = row.querySelector("td:nth-child(5)").textContent.toLowerCase();
-            const ticketPanne = row.querySelector("td:nth-child(7)").textContent.toLowerCase();
+            const ticketDateModif = row.querySelector("td:nth-child(6)").textContent.toLowerCase();
+            const ticketStatut = row.querySelector("td:nth-child(7)").textContent.toLowerCase();
+            const ticketPanne = row.querySelector("td:nth-child(8)").textContent.toLowerCase();
 
             // Cacher ou afficher la ligne en fonction de la correspondance avec le texte recherché
-            if (ticketTitle.includes(searchText) || ticketDescription.includes(searchText) || ticketID.includes(searchText) || ticketUser.includes(searchText) || ticketDateCrea.includes(searchText) || ticketPanne.includes(searchText) ){
+            if (ticketTitle.includes(searchText) || ticketDescription.includes(searchText) || ticketID.includes(searchText) || ticketUser.includes(searchText) || ticketDateCrea.includes(searchText) || ticketDateModif.includes(searchText) || ticketPanne.includes(searchText) || ticketStatut.includes(searchText) ){
                 row.style.display = "table-row";
             } else {
                 row.style.display = "none";

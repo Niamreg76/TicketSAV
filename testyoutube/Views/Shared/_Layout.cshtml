@@ -12,7 +12,7 @@
     <title>@ViewData["Title"] - TicketSystem</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="icon" href="https://www.smartlight-eu.com/Content/img/Logo-SMARTlight-Blanc-v2.png" />
+    <link rel="icon" href="https://smartlight-shop.fr/themes/smartlight/assets/img/Logo_2.jpg" />
 </head>
 <body>
     <header>
@@ -30,9 +30,6 @@
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark effet" asp-area="" asp-controller="Home" asp-action="Index">Accueil</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark effet" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         @if (SignInManager.IsSignedIn(User))
                         {
@@ -55,7 +52,6 @@
     <footer class="border-top footer text-muted bg-white">
         <div class="container" style="padding: 0">
             &copy; 2023 - TicketSystem - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

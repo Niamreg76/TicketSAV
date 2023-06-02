@@ -28,6 +28,4 @@ document.getElementById("sendButton").addEventListener("click", function (event)
     });
  
     messageInput.focus();
-
 });
-
