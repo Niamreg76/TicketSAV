@@ -56,12 +56,14 @@ namespace testyoutube.Services
 
             public Task SendMailAsync(string Email, string subject, string message)
             {
+                //info de connexion au mail...
                 var client = new SmtpClient("smtp.gmail.com", 587)
                 {
                     EnableSsl = true,
                     Credentials = new NetworkCredential("romanautomail123@gmail.com", "dupbcuegswbwwbdv")
                 };
 
+                //creation du mail
                 return client.SendMailAsync(
                     new MailMessage(from: "romanautomail123@gmail.com",
                                     to: Email,

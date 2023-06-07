@@ -15,6 +15,8 @@ namespace testyoutube.Areas.Identity
     {
         public void Configure(IWebHostBuilder builder)
         {
+            // générateur de la page identity
+
             builder.ConfigureServices((context, services) => {
                 services.AddDbContext<UserDataContext>(options =>
                     options.UseMySQL(

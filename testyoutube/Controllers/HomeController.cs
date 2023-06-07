@@ -32,6 +32,7 @@ namespace testyoutube.Controllers
 
         public IActionResult Index()
         {
+            //affichage de la première page
             var listTicket = _context.Tickets
                 .Include(t => t.Statut) 
                 .Include(t => t.Panne)
