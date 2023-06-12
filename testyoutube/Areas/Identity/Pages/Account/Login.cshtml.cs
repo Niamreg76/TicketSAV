@@ -42,7 +42,7 @@ namespace testyoutube.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [EmailAddress]
+            [EmailAddress(ErrorMessage = "Veuillez entrer une adresse e-mail valide.")]
             public string Email { get; set; }
 
             [Required]
@@ -97,7 +97,7 @@ namespace testyoutube.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Identifiants incorrects.");
                     return Page();
                 }
             }

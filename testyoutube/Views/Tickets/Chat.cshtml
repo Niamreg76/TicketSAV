@@ -88,7 +88,7 @@
                             var currentUserEmail = User.Identity.Name;
                             var isCurrentUserMessage = message.User.Email == currentUserEmail;
 
-                            <li class="@(isCurrentUserMessage ? "message" : "")">@message.User.Email <span>   @message.DateMessage.ToString("HH:mm")</span> : @message.Contenu </li>
+                            <li class="@(isCurrentUserMessage ? "message" : "message2")">@message.User.Email <span>   @message.DateMessage.ToString("HH:mm")</span> : @message.Contenu </li>
                         }
                     </ul>
                 </div>

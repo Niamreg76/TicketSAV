@@ -55,6 +55,7 @@ namespace testyoutube.Areas.Identity.Pages.Account
             [StringLength(100, ErrorMessage = "Le mot de passe doit comporter au moins {2} et au maximum {1} caractères.", MinimumLength = 8)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
+            [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).*$", ErrorMessage = "Le mot de passe doit avoir au moins un caractère spécial, un chiffre et une majuscule.")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]

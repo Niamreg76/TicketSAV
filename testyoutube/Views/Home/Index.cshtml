@@ -124,6 +124,8 @@
         @if (!Model.Any(t => t.ID_utilisateur == UserManager.GetUserId(User)))
         {
             <h3 class="text-white">Aucun ticket trouvé</h3>
+            <p class="text-white">Pour entrer en contact avec SMARTlight, créez un ticket en cliquant sur le bouton "Créer un ticket" en haut de votre écran.</p>
+            <p class="text-white">Une fois le ticket crée, appuyez sur le bouton "Discussion" pour consulter les messages envoyés.</p>
         }
         else
         {

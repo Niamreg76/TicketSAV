@@ -67,7 +67,7 @@
             </dd>
         </dl>
 
-        <form asp-action="Delete">
+        <form asp-action="Delete" onsubmit="return confirmDelete();">
             <input type="hidden" asp-for="ID_ticket" />
             <input type="submit" value="Supprimer" class="btn btn-danger" /> |
             <a asp-controller="Home" asp-action="Index">Retour à la liste</a>
@@ -82,3 +82,13 @@ else
         <p>Connectez-vous ou inscrivez-vous en haut de la page</p>
     </div>
 }
+
+<script>
+    function confirmDelete() {
+        if (confirm("Êtes-vous sûr de vouloir supprimer ce ticket?")) {
+            return true; // Continuer avec la soumission du formulaire de suppression
+        } else {
+            return false; // Annuler la soumission du formulaire de suppression
+        }
+    }
+</script>
