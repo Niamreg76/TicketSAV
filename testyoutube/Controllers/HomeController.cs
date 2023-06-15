@@ -80,20 +80,23 @@ namespace testyoutube.Controllers
                 tickets.Date_creation = DateTime.Now;
                 tickets.Date_modif = DateTime.Now;
                 tickets.ID_conversation = tickets.ID_ticket;
+                //ici on attribue les dates ainsi que l'id du formulaire aux données de la base de données
 
                 var statut = _context.Statut.FirstOrDefault(s => s.ID_statut == 1);
                 if (statut != null)
                 {
                     tickets.Statut = statut;
                     tickets.Statut.Nom = "Ouvert";
+                    //ici on attribue directement le statut du ticket en "ouvert"
                 }
 
                 var user = await _userManager.GetUserAsync(User);
-
                 tickets.ID_utilisateur = user.Id;
+                //ici on récupère l'id de l'utilisateur depuis Identity
+
                 _context.Tickets.Add(tickets);
                 await _context.SaveChangesAsync();
-
+                //on ajoute le ticket à la base de données
 
                 tickets.ID_conversation = tickets.ID_ticket;
                 await _context.SaveChangesAsync();
